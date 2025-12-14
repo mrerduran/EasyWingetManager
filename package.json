@@ -1,0 +1,39 @@
+{
+  "name": "easy-winget-manager",
+  "version": "1.0.0",
+  "description": "A simple Electron-based GUI for winget on Windows 11 with search, update checks, auto-update, and ignore controls.",
+  "main": "src/main.js",
+  "keywords": [
+    "electron",
+    "winget",
+    "windows",
+    "updates"
+  ],
+  "author": "Ogulcan Erduran https://ogulcan.me",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.ogulcann.easywingetmanager",
+    "productName": "Easy Winget Manager",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": ["nsis", "msi"]
+    }
+  }
+}
