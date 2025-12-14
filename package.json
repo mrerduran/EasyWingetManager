@@ -21,7 +21,7 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.ogulcann.easywingetmanager",
+    "appId": "com.mrerduran.easywingetmanager",
     "productName": "Easy Winget Manager",
     "files": [
       "src/**/*",

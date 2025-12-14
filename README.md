@@ -22,7 +22,7 @@
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/ogulcann/easy-winget-manager.git
+    git clone https://github.com/mrerduran/EasyWingetManager.git
     cd easy-winget-manager
     ```
 
