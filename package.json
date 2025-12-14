@@ -33,7 +33,11 @@
       "output": "dist"
     },
     "win": {
-      "target": ["nsis", "msi"]
+      "icon": "build/icon.ico",
+      "target": [
+        "nsis",
+        "msi"
+      ]
     }
   }
 }
