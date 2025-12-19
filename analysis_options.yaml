@@ -1,0 +1,44 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - lib/src/rust/frb_generated.dart
+    - lib/src/rust/frb_generated.io.dart
+    - lib/src/rust/frb_generated.web.dart
+
+linter:
+  rules:
+    - always_declare_return_types
+    - cancel_subscriptions
+    - close_sinks
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+    - unawaited_futures
+    - unnecessary_await_in_return
+    - library_private_types_in_public_api
+    - avoid_print
+    - prefer_final_fields
+    - prefer_final_locals
+    - avoid_redundant_argument_values
+    - avoid_unused_constructor_parameters
+    - cascade_invocations
+    - join_return_with_assignment
+    - no_leading_underscores_for_local_identifiers
+    - prefer_expression_function_bodies
+    - prefer_interpolation_to_compose_strings
+    - type_annotate_public_apis
+    - use_super_parameters
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
