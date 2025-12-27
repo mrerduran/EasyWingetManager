@@ -1,45 +1,4 @@
-# Flutter/Dart
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-.pub-cache/
-.pub/
-build/
-
-# Rust/Cargo
-**/target/
-rust/Cargo.lock
-
-# Node/Electron (Legacy)
 node_modules/
 dist/
-dist-release/
-release/
-package-lock.json
-
-# Windows
-windows/flutter/ephemeral/
-windows/flutter/generated_plugin_registrant.h
-windows/flutter/generated_plugin_registrant.cc
-windows/flutter/generated_plugins.cmake
-windows/flutter/generated_plugin_registrant.dart
-*.exe
-*.dll
-*.pdb
-
-# IDEs
-.idea/
-.vscode/
-*.swp
-*.swo
-*.sublime-project
-*.sublime-workspace
-*.iml
-
-# OS files
 .DS_Store
 Thumbs.db
-
-# Project specific
-*.ewm
