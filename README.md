@@ -39,7 +39,7 @@
 ## Author
 
 **Ogulcan Erduran**  
-🌐 [https://ogulcan.me](https://ogulcan.me)
+🌐 [https://ogulcann.com/]([https://ogulcann.com/))
 
 ## License
 
