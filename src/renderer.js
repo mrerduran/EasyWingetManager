@@ -11,6 +11,16 @@ const navItems = {
     backup: document.getElementById('nav-backup')
 };
 
+// Add keyboard navigation support
+Object.values(navItems).forEach(item => {
+    item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            item.click();
+        }
+    });
+});
+
 const sections = {
     updates: document.getElementById('section-updates'),
     installed: document.getElementById('section-installed'),

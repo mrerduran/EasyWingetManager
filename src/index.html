@@ -15,10 +15,10 @@
             </div>
             <nav>
                 <ul>
-                    <li id="nav-updates" class="active" onclick="showSection('updates')">Updates</li>
-                    <li id="nav-installed" onclick="showSection('installed')">Installed</li>
-                    <li id="nav-search" onclick="showSection('search')">Search Packages</li>
-                    <li id="nav-backup" onclick="showSection('backup')">Backup / Restore</li>
+                    <li id="nav-updates" class="active" onclick="showSection('updates')" role="button" tabindex="0">Updates</li>
+                    <li id="nav-installed" onclick="showSection('installed')" role="button" tabindex="0">Installed</li>
+                    <li id="nav-search" onclick="showSection('search')" role="button" tabindex="0">Search Packages</li>
+                    <li id="nav-backup" onclick="showSection('backup')" role="button" tabindex="0">Backup / Restore</li>
                 </ul>
             </nav>
             <div class="footer">
@@ -55,7 +55,7 @@
                     <h1>Search Packages</h1>
                 </header>
                 <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Search for apps (e.g. Chrome, VS Code)...">
+                    <input type="text" id="search-input" placeholder="Search for apps (e.g. Chrome, VS Code)..." aria-label="Search packages">
                     <button id="btn-search" class="primary-btn">Search</button>
                 </div>
                 <div id="search-results" class="list-container">
