@@ -152,6 +152,8 @@ document.getElementById('btn-check-updates').addEventListener('click', async () 
         if (packages.length === 0) {
             containers.updates.innerHTML = '<p class="placeholder-text">No verified winget updates available.</p>';
         } else {
+            // Optimization: Use DocumentFragment to batch DOM updates
+            const fragment = document.createDocumentFragment();
             packages.forEach(pkg => {
                 const card = document.createElement('div');
                 card.className = 'package-card';
@@ -165,8 +167,9 @@ document.getElementById('btn-check-updates').addEventListener('click', async () 
                         <button class="action-btn" onclick="updatePackage('${pkg.id}')">Update</button>
                     </div>
                 `;
-                containers.updates.appendChild(card);
+                fragment.appendChild(card);
             });
+            containers.updates.appendChild(fragment);
         }
 
     } catch (error) {
@@ -206,6 +209,8 @@ async function loadInstalledPackages() {
         if (packages.length === 0) {
             containers.installed.innerHTML = '<p class="placeholder-text">No verified winget packages found.</p>';
         } else {
+            // Optimization: Use DocumentFragment to batch DOM updates
+            const fragment = document.createDocumentFragment();
             packages.forEach(pkg => {
                 const card = document.createElement('div');
                 card.className = 'package-card';
@@ -219,8 +224,9 @@ async function loadInstalledPackages() {
                          <button class="danger-btn" onclick="uninstallPackage('${pkg.id}')">Uninstall</button>
                     </div>
                 `;
-                containers.installed.appendChild(card);
+                fragment.appendChild(card);
             });
+            containers.installed.appendChild(fragment);
         }
     } catch (error) {
         containers.installed.innerHTML = `<p class="placeholder-text" style="color: red;">Error: ${error.message}</p>`;
@@ -259,6 +265,8 @@ document.getElementById('btn-search').addEventListener('click', async () => {
         if (packages.length === 0) {
             containers.search.innerHTML = '<p class="placeholder-text">No verified packages found.</p>';
         } else {
+            // Optimization: Use DocumentFragment to batch DOM updates
+            const fragment = document.createDocumentFragment();
             packages.forEach(pkg => {
                 const card = document.createElement('div');
                 card.className = 'package-card';
@@ -273,8 +281,9 @@ document.getElementById('btn-search').addEventListener('click', async () => {
                         <button class="primary-btn" onclick="installPackage('${pkg.id}')">Install</button>
                     </div>
                 `;
-                containers.search.appendChild(card);
+                fragment.appendChild(card);
             });
+            containers.search.appendChild(fragment);
         }
     } catch (error) {
         containers.search.innerHTML = `<p class="placeholder-text" style="color: red;">Error: ${error.message}</p>`;
@@ -330,6 +339,8 @@ function renderExportList(packages) {
     const container = containers.exportList;
     container.innerHTML = '';
     
+    // Optimization: Use DocumentFragment to batch DOM updates
+    const fragment = document.createDocumentFragment();
     packages.forEach((pkg, index) => {
         const card = document.createElement('div');
         card.className = 'package-card';
@@ -343,8 +354,9 @@ function renderExportList(packages) {
                 </div>
             </div>
         `;
-        container.appendChild(card);
+        fragment.appendChild(card);
     });
+    container.appendChild(fragment);
 }
 
 // Select All - Export
@@ -432,6 +444,8 @@ function renderImportList(packages) {
         return;
     }
 
+    // Optimization: Use DocumentFragment to batch DOM updates
+    const fragment = document.createDocumentFragment();
     packages.forEach((pkg, index) => {
         const card = document.createElement('div');
         card.className = 'package-card';
@@ -448,8 +462,9 @@ function renderImportList(packages) {
                 <span class="status-badge" id="status-${pkg.id}">Pending</span>
             </div>
         `;
-        container.appendChild(card);
+        fragment.appendChild(card);
     });
+    container.appendChild(fragment);
 }
 
 // Select All - Import
