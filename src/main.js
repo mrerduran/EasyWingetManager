@@ -2,7 +2,7 @@
 
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
-const { exec } = require('child_process');
+const { execFile } = require('child_process');
 const fs = require('fs');
 const crypto = require('crypto');
 
@@ -61,10 +61,11 @@ app.on('window-all-closed', function () {
 });
 
 // Helper function to execute commands
-const runCommand = (command) => {
+const runCommand = (file, args) => {
   return new Promise((resolve) => {
     // Increase maxBuffer to handle large outputs (e.g. winget list)
-    exec(command, { maxBuffer: 1024 * 1024 * 5, encoding: 'utf8' }, (error, stdout, stderr) => {
+    // Use execFile to avoid spawning a shell and preventing command injection
+    execFile(file, args, { maxBuffer: 1024 * 1024 * 5, encoding: 'utf8' }, (error, stdout, stderr) => {
       if (error) {
         console.error(`Command error: ${error.message}`);
       }
@@ -79,52 +80,41 @@ const runCommand = (command) => {
 ipcMain.handle('winget-check-updates', async () => {
   // 'winget upgrade' lists available updates
   // Enforcing source 'winget' and removing unknown versions as requested
-  const command = 'winget upgrade --source winget';
-  return await runCommand(command);
+  return await runCommand('winget', ['upgrade', '--source', 'winget']);
 });
 
 // 2. List installed packages
 ipcMain.handle('winget-list', async () => {
   // Only list packages from 'winget' source
-  const command = 'winget list --source winget';
-  return await runCommand(command);
+  return await runCommand('winget', ['list', '--source', 'winget']);
 });
 
 // 3. Search packages
 ipcMain.handle('winget-search', async (event, query) => {
   if (!query) return { stdout: '', stderr: 'No query provided', error: null };
-  // Escape quotes to prevent injection - basic sanitization
-  const safeQuery = query.replace(/"/g, '\\"');
   // Only search in 'winget' source
-  const command = `winget search "${safeQuery}" --source winget`;
-  return await runCommand(command);
+  return await runCommand('winget', ['search', query, '--source', 'winget']);
 });
 
 // 4. Install package
 ipcMain.handle('winget-install', async (event, packageId) => {
   if (!packageId) return { stdout: '', stderr: 'No ID provided', error: null };
-  const safeId = packageId.replace(/"/g, '\\"');
   // --accept-package-agreements --accept-source-agreements to avoid prompts blocking
   // Also enforce source winget for installation to be safe
-  const command = `winget install --id "${safeId}" --source winget --accept-package-agreements --accept-source-agreements`;
-  return await runCommand(command);
+  return await runCommand('winget', ['install', '--id', packageId, '--source', 'winget', '--accept-package-agreements', '--accept-source-agreements']);
 });
 
 // 5. Upgrade specific package
 ipcMain.handle('winget-upgrade-package', async (event, packageId) => {
   if (!packageId) return { stdout: '', stderr: 'No ID provided', error: null };
-  const safeId = packageId.replace(/"/g, '\\"');
   // Enforce source winget
-  const command = `winget upgrade --id "${safeId}" --source winget --accept-package-agreements --accept-source-agreements`;
-  return await runCommand(command);
+  return await runCommand('winget', ['upgrade', '--id', packageId, '--source', 'winget', '--accept-package-agreements', '--accept-source-agreements']);
 });
 
 // 6. Uninstall package
 ipcMain.handle('winget-uninstall', async (event, packageId) => {
     if (!packageId) return { stdout: '', stderr: 'No ID provided', error: null };
-    const safeId = packageId.replace(/"/g, '\\"');
-    const command = `winget uninstall --id "${safeId}"`;
-    return await runCommand(command);
+    return await runCommand('winget', ['uninstall', '--id', packageId]);
   });
 
 // 7. Export Packages
