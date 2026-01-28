@@ -54,6 +54,13 @@ nav li:hover, nav li.active {
     border-left: 4px solid #3498db;
 }
 
+nav li:focus-visible {
+    outline: 2px solid #3498db;
+    outline-offset: -2px;
+    background-color: #34495e;
+    border-left: 4px solid #3498db;
+}
+
 .footer {
     padding: 10px 20px;
     font-size: 0.8rem;
